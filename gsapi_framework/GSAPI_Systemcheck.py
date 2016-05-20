@@ -58,6 +58,75 @@ class GSAPI_Systemcheck(GSAPI_Base):
         
         return resp_obj
     
+    def jobs_get (self):
+        api = 'grid/job/get'
+        auth_api = self._initurl(api)
+        print 'getting jobs ', auth_api
+        #print 'headers -- ', self._get_authheader()
+        resp = requests.get(auth_api,  headers=self._get_authheader())
+        if resp.status_code != 200:
+            print resp
+            #     This means something went wrong.
+            raise ApiError(resp.status_code, 'POST {} / {}'.format(api, resp.status_code))
+        
+        resp_obj = resp.json()
+         # pretty printing of json-formatted string
+        print json.dumps(resp_obj, sort_keys=True, indent=4)
+        
+        return resp_obj
+    
+    
+    def events_get (self):
+        api = 'grid/event/get'
+        auth_api = self._initurl(api)
+        print 'getting Events ', auth_api
+        #print 'headers -- ', self._get_authheader()
+        resp = requests.get(auth_api,  headers=self._get_authheader())
+        if resp.status_code != 200:
+            print resp
+            #     This means something went wrong.
+            raise ApiError(resp.status_code, 'POST {} / {}'.format(api, resp.status_code))
+        
+        resp_obj = resp.json()
+         # pretty printing of json-formatted string
+        print json.dumps(resp_obj, sort_keys=True, indent=4)
+        
+        return resp_obj
+    
+    def jobs_count (self):
+        api = 'grid/job/count'
+        auth_api = self._initurl(api)
+        print 'getting jobs count ', auth_api
+        #print 'headers -- ', self._get_authheader()
+        resp = requests.get(auth_api,  headers=self._get_authheader())
+        if resp.status_code != 200:
+            print resp
+            #     This means something went wrong.
+            raise ApiError(resp.status_code, 'POST {} / {}'.format(api, resp.status_code))
+        
+        resp_obj = resp.json()
+         # pretty printing of json-formatted string
+        print json.dumps(resp_obj, sort_keys=True, indent=4)
+        
+        return resp_obj
+    
+    def events_count (self):
+        api = 'grid/event/count'
+        auth_api = self._initurl(api)
+        print 'getting jobs count ', auth_api
+        #print 'headers -- ', self._get_authheader()
+        resp = requests.get(auth_api,  headers=self._get_authheader())
+        if resp.status_code != 200:
+            print resp
+            #     This means something went wrong.
+            raise ApiError(resp.status_code, 'POST {} / {}'.format(api, resp.status_code))
+        
+        resp_obj = resp.json()
+         # pretty printing of json-formatted string
+        print json.dumps(resp_obj, sort_keys=True, indent=4)
+        
+        return resp_obj
+    
     def configuration_profile_get (self):
         api = 'grid/profile/configuration/get'
         auth_api = self._initurl(api)
@@ -96,7 +165,6 @@ class GSAPI_Systemcheck(GSAPI_Base):
 if __name__ == '__main__':
     api = GSAPI_Systemcheck('10.100.37.153', '12309')
     print 'GS API Login - ', api.login()
-    nodes = api.maskingset_get()
-   
+    nodes = api.events_get()
        
     print 'GS API Logout - ', api.logout()
